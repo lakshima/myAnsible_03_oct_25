@@ -2,7 +2,8 @@
 - hosts: all
   become: yes
   tasks:
-   - name: i want to install apache2 webserver on ubuntu
-     apt: apache2
-     state: present
-
+    - name: Install Apache2 web server on Ubuntu
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
