@@ -6,4 +6,19 @@
       apt:
         name: apache2
         state: present
-        update_cache: yes
+      when: ansible_os_family == "Debian"
+    - name: Start apache service
+      apt:
+        name: apache2
+        state: started
+      when: ansible_os_family == "Debian"  
+    - name: install httpd on redhat nodes
+      apt:
+        name: httpd
+        state: present
+      when: ansible_os_family == "Redhat"   
+    - name: start httpd on redhat nodes
+      apt:
+        name: httpd
+        state: started
+      when: ansible_os_family == "Redhat"     
