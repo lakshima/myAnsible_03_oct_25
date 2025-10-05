@@ -7,18 +7,23 @@
         name: apache2
         state: present
       when: ansible_os_family == "Debian"
-    - name: Start apache service
+
+    - name: Start apache2 service on Ubuntu
       service:
         name: apache2
         state: started
-      when: ansible_os_family == "Debian"  
-    - name: install httpd on redhat nodes
-      apt:
+        enabled: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Install httpd on RedHat-based systems
+      dnf:
         name: httpd
         state: present
-      when: ansible_os_family == "RedHat"   
-    - name: start httpd on redhat nodes
+      when: ansible_os_family in ["RedHat", "Amazon"]
+
+    - name: Start httpd service on RedHat-based systems
       service:
         name: httpd
         state: started
-      when: ansible_os_family == "RedHat"     
+        enabled: yes
+      when: ansible_os_family in ["RedHat", "Amazon"]
